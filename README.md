@@ -49,3 +49,8 @@ Note: the aivolt scripts were developed against this user's home
 directory layout; the copies in `aivolt/scripts/` use relative paths
 where possible, but check `aivolt_bridge.py` for any remaining
 hardcoded paths before first use.
+
+`aivolt/aivolt-project/voltage_fingerprints.sqlite3` is the fingerprint
+database with saved readings (e.g. the `aaa` battery reference). It is
+optional — the scripts recreate the schema automatically — but keep it
+if you want the existing fingerprints.
