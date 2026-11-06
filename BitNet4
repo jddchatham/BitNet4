@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+export LD_LIBRARY_PATH="$ROOT/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+export BITC4_EXTERNAL_MODEL="$ROOT/models/BitNet4.gguf"
+export BITC4_PHASE20A1_EXTERNAL_LAYERS=1
+export BITC4_PHASE20A2_EVICT=1
+export BITC4_EXTERNAL_INPUT=1
+export BITC4_REUSABLE_OUTPUT=1
+
+LOG_ARGS=()
+QUIET_STDERR=1
+if [[ "${1:-}" == "--debug" ]]; then
+  shift
+  QUIET_STDERR=0
+fi
+
+if (( QUIET_STDERR )); then
+  exec "$ROOT/llama-cli" \
+    -m "$BITC4_EXTERNAL_MODEL" \
+    -c 1024 -b 512 -ub 512 -t 2 -tb 2 \
+    --temp 0.7 --seed 42 --conversation "$@" 2>/dev/null
+else
+  exec "$ROOT/llama-cli" \
+    -m "$BITC4_EXTERNAL_MODEL" \
+    -c 1024 -b 512 -ub 512 -t 2 -tb 2 \
+    --temp 0.7 --seed 42 --conversation "$@"
+fi
