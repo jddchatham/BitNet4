@@ -17,14 +17,14 @@ mkdir -p models
 
 The launcher, shared libraries, and hashes for them are included.
 
-## Option 1 — plain chat
+## Run the chat
 
 ```sh
 ./BitNet4            # interactive chat
 ./BitNet4 --debug    # with diagnostics
 ```
 
-## Option 2 — with AI Volt Lab (aivolt)
+## AI Volt Lab files
 
 `aivolt/` contains the AI Volt Lab integration: the Tang Primer 25K /
 ADS1115 voltmeter project (`aivolt/aivolt-project/`, including the
@@ -46,6 +46,6 @@ python3 ~/.local/bin/bitnet-cortex-2.0/aivolt_bridge.py diagnose
 ```
 
 Note: the aivolt scripts were developed against this user's home
-directory layout; the `sed`-patched copies in `aivolt/scripts/` use
-relative paths where possible, but check `aivolt_bridge.py` for any
-remaining hardcoded paths before first use.
+directory layout; the copies in `aivolt/scripts/` use relative paths
+where possible, but check `aivolt_bridge.py` for any remaining
+hardcoded paths before first use.
